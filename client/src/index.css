@@ -1,0 +1,258 @@
+/* ========== 0. Reset & Box Sizing ========== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  background-color: #0d253f; /* TMDB dark blue */
+  color: #fff;
+  line-height: 1.6;
+}
+
+
+.app {
+  max-width: 1100px;           
+  margin: 0 auto;
+  padding: 24px 16px 40px;   
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+
+.window-selector {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.window-selector button {
+  font-size: 0.9rem;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background-color: rgba(3, 37, 65, 0.95);
+  color: #e5e5e5;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+.window-selector button:hover {
+  background-color: #01b4e4;
+  border-color: #01b4e4;
+  color: #032541;
+  transform: translateY(-1px);
+}
+
+
+.window-selector button.active {
+  background-color: #01b4e4;
+  border-color: #01b4e4;
+  color: #032541;
+}
+
+
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+
+.movie-card {
+  background-color: #1b2a3a;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+
+.movie-card img {
+  width: 100%;
+  height: 230px;   
+  object-fit: cover;
+  display: block;
+}
+
+.movie-card .no-image {
+  width: 100%;
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #13253b;
+  color: #9ca3af;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+
+.movie-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px 8px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #f9fafb;
+}
+
+
+.movie-details {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 20px 22px 24px;
+  background-color: #1b2a3a;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+
+.movie-details > button {
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: #0d253f;
+  color: #f9fafb;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.movie-details > button:hover {
+  background-color: #01b4e4;
+  border-color: #01b4e4;
+  color: #032541;
+  transform: translateY(-1px);
+}
+
+
+.movie-info {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+
+.movie-info img {
+  width: 260px;
+  max-width: 40%;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+
+.movie-info h2 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.movie-info p {
+  margin-bottom: 10px;
+  color: #e5e7eb;
+}
+
+.movie-info span {
+  font-weight: 600;
+}
+
+
+.loading,
+.error {
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 40px;
+  color: #e5e5e5;
+}
+
+.error {
+  color: #fecaca;
+}
+
+
+@media (max-width: 768px) {
+  .app {
+    padding: 16px 12px 28px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  .window-selector {
+    flex-wrap: wrap;
+  }
+
+  .movie-details {
+    margin: 24px 12px;
+  }
+
+  .movie-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+
+  .movie-info img {
+    width: 220px;
+    max-width: 60%;
+  }
+}
+.details-favorite-button {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.details-favorite-button:hover {
+  background-color: var(--color-primary);
+  color: #0d4130;
+}
