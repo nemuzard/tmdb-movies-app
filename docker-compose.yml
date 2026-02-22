@@ -1,0 +1,26 @@
+services:
+  backend:
+    build:
+      context: ./server
+    ports:
+      - "5050:5050"
+    environment:
+      - PORT=5050
+      - TMDB_TOKEN=${TMDB_TOKEN}
+      - CACHE_TTL_MS=60000
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:5050/health',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_BACKEND_URL=http://backend:5050
+    depends_on:
+      backend:
+        condition: service_healthy
